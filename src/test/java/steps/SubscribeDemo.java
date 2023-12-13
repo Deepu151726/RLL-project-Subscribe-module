@@ -77,20 +77,43 @@ public class SubscribeDemo {
 	@When("clicks on the subscribe button")
 	public void clicks_on_the_subscribe_button() throws InterruptedException{
 	   sp.subscribebtn();
-	   
-	   Thread.sleep(2000);
-		}
+		
 
 	@Then("they should see a confirmation message")
 	public void they_should_see_a_confirmation_message() {
 		System.out.println("They should see a confirmation message");
-		
-	    
-	}
-	
+		  WebDriverWait Wait =new WebDriverWait(BaseTest.driver,Duration.ofSeconds(12000));
+		   String expectedURL = "https://www.chilternoakfurniture.co.uk/challenge#footer_signup_form";
+		   
+		Wait.until(ExpectedConditions.not(ExpectedConditions.urlToBe(expectedURL)));		   
 
-}
 		
+	@When ("the user enters their Invalid {string}")
+		 public void the_user_enter_thier_Invalid_email(String email) throws InterruptedException, EncryptedDocumentException, IOException {
+			
+			 List<Map<String,String>> testdata = XLS_DataProvider.getTestData("sheet2");
+				for(Map<String , String>e : testdata) {
+					email =String.valueOf(e.get("Email"));	
+					
+					
+					sp.enterdata(email);
+					
+					Thread.sleep(2000);
+					
+		}
+				}	
+
+     @Then("system shows fill the requirement")
+    
+     public void system_shows_fill_the_requirement() {
+ 
+	   System.out.println("System shows fill the requirement");
+}
+
+	    
+		
+}
+
 	
 	
 
